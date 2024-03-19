@@ -1,4 +1,4 @@
-module fsm(
+module state_machine(
   input clk,
   input reset,
   output reg [6:0] a_rom,
