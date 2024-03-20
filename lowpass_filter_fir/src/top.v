@@ -1,9 +1,9 @@
 // The 'top' module
 module top(
-  input wire	clk,     // Clock signal
-  input wire	reset,     // Reset signal
+  input wire	clk,     					// Clock signal
+  input wire	reset,     				// Reset signal
   input wire	[15:0] filter_in, // Filter input
-  output wire	[15:0] filter_out; // Filter output
+  output wire	[15:0] filter_out // Filter output
 );
 
 
@@ -16,7 +16,7 @@ wire	[15:0] WIRE_5;
 
 
 
-rom	module_rom(
+rom	U1(
 	.clock(WIRE_0),
 	.address(WIRE_1),
 	.q(WIRE_5));
@@ -33,7 +33,7 @@ rom	module_rom(
 // 	.filter_out(filter_out));
 
 
-fsm	module_state_machine(
+state_machine	U2(
 	.clk(clk),
 	.reset(reset),
 	.clock_rom(WIRE_0),
@@ -41,13 +41,8 @@ fsm	module_state_machine(
 	.wren(WIRE_3),
 	.a_ram(WIRE_4),
 	.a_rom(WIRE_1));
-	defparam	module_state_machine.Config_enderecos = 3'b001;
-	defparam	module_state_machine.Decrementar_i = 3'b100;
-	defparam	module_state_machine.Encerrar = 3'b101;
-	defparam	module_state_machine.Escrever_RAM = 3'b011;
-	defparam	module_state_machine.Inicio = 3'b000;
-	defparam	module_state_machine.Ler_ROM = 3'b010;
-	defparam	module_state_machine.maxcof = 6'b111101;
+
+	defparam	U2.maxcof = 6'b111101;
 
 
 endmodule

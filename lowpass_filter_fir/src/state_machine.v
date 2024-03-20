@@ -9,20 +9,18 @@ module state_machine(
 );
 						
 // Parameters for state machine
-parameter maxcof = 6'd61,  // Change the value for each filter
+parameter maxcof = 6'd61;  // Change the value for each filter
 
-// Define FSM states as an enumerated type
-typedef enum reg [2:0] {
-  INITIAL           = 3'b000, // Initial state
-  ADDRESS           = 3'b001, // Configuration address state
-  READ_ROM          = 3'b010, // Read from ROM state
-  WRITE_SIGNAL      = 3'b011, // Write to RAM state
-  DECREASE_ADDRESS  = 3'b100, // Decrease state
-  FINISH            = 3'b101  // FINISH state
-} fsm_state_t;
+// Define FSM states as parameters
+parameter INITIAL = 3'b000,       // Initial state
+          ADDRESS = 3'b001,       // Configuration address state
+          READ_ROM = 3'b010,      // Read from ROM state
+          WRITE_SIGNAL = 3'b011,  // Write to RAM state
+          DECREASE = 3'b100,      // Decrease state
+          FINISH = 3'b101;        // FINISH state
 
-// Declare current and next state variables of the enumerated type
-fsm_state_t current_state, next_state;
+// Declare current and next state variables
+reg [2:0] current_state, next_state;
 
 reg [5:0] i;
 
@@ -34,7 +32,7 @@ always @ (posedge clk) begin
   end
   else begin
     current_state <= next_state;
-    if(next_state == Decrese)
+    if(next_state == DECREASE)
       i <= i - 1;
   end			
 end	
